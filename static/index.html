@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodline — AI Emotion Prediction</title>
+  <meta name="description" content="Discover the feelings hidden in your text with intelligent BiGRU deep learning emotion prediction.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237357E8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M8 14s1.5 2 4 2 4-2 4-2'/%3E%3Cline x1='9' y1='9' x2='9.01' y2='9'/%3E%3Cline x1='15' y1='9' x2='15.01' y2='9'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-emotion="neutral">
+
+  <!-- Ambient Animated Background Canvas -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+    <div class="ambient-blob blob-3"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <div class="app-layout">
+
+    <!-- Premium Floating Navigation -->
+    <header class="navbar-wrapper">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="#hero" class="brand" aria-label="Moodline Home">
+          <div class="brand-symbol">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="brand-svg">
+              <circle cx="16" cy="16" r="14" fill="url(#brandGrad)" />
+              <path d="M10 18C11.5 20.5 13.5 21.5 16 21.5C18.5 21.5 20.5 20.5 22 18" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="12" cy="13" r="1.8" fill="#FFFFFF"/>
+              <circle cx="20" cy="13" r="1.8" fill="#FFFFFF"/>
+              <defs>
+                <linearGradient id="brandGrad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#7357E8"/>
+                  <stop offset="0.6" stop-color="#5940C8"/>
+                  <stop offset="1" stop-color="#0891B2"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Moodline</span>
+            <span class="brand-badge">AI Powered</span>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <a href="#hero" class="nav-link active">Home</a>
+          <a href="#workspace" class="nav-link">Workspace</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#technology" class="nav-link">Technology</a>
+        </div>
+
+        <div class="nav-actions">
+          <div class="status-pill" id="statusPill" title="Backend Model Connection">
+            <span class="brand-mark status-dot" id="statusDot" aria-hidden="true"></span>
+            <span class="status-label" id="serverStatusText">Connecting to model…</span>
+          </div>
+          <div class="theme-tag" title="Premium Light Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <span>Light Studio</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="mainContent">
+
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <div class="hero-badge">
+          <span class="badge-icon">✦</span>
+          <span>BiGRU Deep Learning Architecture · Real-time NLP</span>
+        </div>
+
+        <h1 class="hero-title">
+          Understand the emotion <br>
+          <span class="gradient-text">behind every word.</span>
+        </h1>
+
+        <p class="hero-description">
+          Discover the feelings hidden in your text with intelligent deep learning.
+          Analyze tone, nuanced emotional states, and probabilistic confidence across six core human emotions.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#workspace" class="btn-primary hero-btn">
+            <span>Try Live Analysis</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="#how-it-works" class="btn-secondary hero-btn">
+            <span>How it works</span>
+          </a>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <span class="metric-val">6</span>
+            <span class="metric-lbl">Core Emotions</span>
+          </div>
+          <div class="metric-separator" aria-hidden="true"></div>
+          <div class="metric-item">
+            <span class="metric-val">BiGRU</span>
+            <span class="metric-lbl">Recurrent Neural Net</span>
+          </div>
+          <div class="metric-separator" aria-hidden="true"></div>
+          <div class="metric-item">
+            <span class="metric-val">&lt; 50ms</span>
+            <span class="metric-lbl">Inference Latency</span>
+          </div>
+          <div class="metric-separator" aria-hidden="true"></div>
+          <div class="metric-item">
+            <span class="metric-val">100%</span>
+            <span class="metric-lbl">Probabilistic Scoring</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analysis Workspace Section -->
+      <section class="workspace-section" id="workspace">
+        <div class="workspace-card">
+
+          <!-- AI Orb Visualization Console -->
+          <div class="workspace-stage">
+            <div class="orb-stage" aria-label="AI Visualization Orb">
+              <div class="orb-orbital-ring ring-1"></div>
+              <div class="orb-orbital-ring ring-2"></div>
+              <div class="orb-glow" id="orbGlow"></div>
+              <div class="orb" id="orb">
+                <span class="orb-emoji" id="orbEmoji" aria-label="Emotion Indicator">✎</span>
+                <div class="orb-inner-shine"></div>
+              </div>
+            </div>
+            <div class="orb-caption">
+              <span class="orb-status-text" id="orbStatusText">Ready to analyze</span>
+              <span class="orb-sub-text">Interactive Neural Representation</span>
+            </div>
+          </div>
+
+          <!-- Input Console -->
+          <div class="input-panel">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <span class="eyebrow">WORKSPACE</span>
+                <h2 class="panel-title">Analyze Sentence Emotion</h2>
+              </div>
+              <span class="shortcut-pill" title="Keyboard Shortcut">
+                <kbd>Ctrl</kbd> + <kbd>Enter</kbd>
+              </span>
+            </div>
+
+            <!-- Example Sentence Chips -->
+            <div class="examples-container">
+              <span class="examples-label">Try an example:</span>
+              <div class="examples-chips">
+                <button type="button" class="chip-btn" data-text="I can't believe how incredibly lucky and delighted we are today!">
+                  <span class="chip-dot dot-joy"></span>
+                  <span>Delighted & lucky</span>
+                </button>
+                <button type="button" class="chip-btn" data-text="My heart aches deeply seeing how tough and painful this has been.">
+                  <span class="chip-dot dot-sadness"></span>
+                  <span>Heart aches</span>
+                </button>
+                <button type="button" class="chip-btn" data-text="I am so deeply in love with every sweet moment we share together.">
+                  <span class="chip-dot dot-love"></span>
+                  <span>Deeply in love</span>
+                </button>
+                <button type="button" class="chip-btn" data-text="This repeated delay and total lack of respect makes me furious.">
+                  <span class="chip-dot dot-anger"></span>
+                  <span>Furious & delayed</span>
+                </button>
+                <button type="button" class="chip-btn" data-text="My hands were trembling with dread before stepping onto the stage.">
+                  <span class="chip-dot dot-fear"></span>
+                  <span>Trembling dread</span>
+                </button>
+                <button type="button" class="chip-btn" data-text="Wait, did they really just announce our project took first prize?!">
+                  <span class="chip-dot dot-surprise"></span>
+                  <span>First prize shock</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="textarea-wrapper">
+              <textarea
+                id="textInput"
+                maxlength="2000"
+                placeholder="Type or paste any text to discover its underlying emotion — e.g. &quot;I couldn't be more thrilled with the breakthrough we achieved today!&quot;"
+                aria-label="Sentence to analyze"
+              ></textarea>
+            </div>
+
+            <div class="input-footer">
+              <div class="footer-left">
+                <button type="button" class="btn-clear" id="clearBtn" title="Clear input text">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                  <span>Clear</span>
+                </button>
+                <span class="char-count" aria-live="polite">
+                  <span id="charCount">0</span> / 2000
+                </span>
+              </div>
+
+              <button id="analyzeBtn" class="btn-primary" disabled>
+                <span class="btn-spinner" aria-hidden="true"></span>
+                <span class="btn-label">Analyze Emotion</span>
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <div class="error-msg-box" id="errorMsg" hidden role="alert">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="error-icon">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <span id="errorMsgText"></span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Prediction Results Section -->
+        <section class="result" id="resultSection" hidden aria-live="polite">
+
+          <div class="result-header">
+            <div class="result-header-left">
+              <span class="eyebrow">PREDICTION RESULTS</span>
+              <h2 class="result-heading">Emotion Classification Analysis</h2>
+            </div>
+            <div class="result-timestamp" id="resultTimestamp">Processed just now</div>
+          </div>
+
+          <div class="result-grid">
+
+            <!-- Primary Emotion Reveal Card -->
+            <div class="reveal" id="revealCard">
+              <div class="reveal-top-bar">
+                <span class="tag-primary">
+                  <span class="tag-pulse"></span>
+                  <span>Dominant Classification</span>
+                </span>
+                <button type="button" class="btn-copy-result" id="copyResultBtn" title="Copy result summary">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span id="copyBtnText">Copy</span>
+                </button>
+              </div>
+
+              <div class="reveal-body">
+                <div class="reveal-main">
+                  <div class="reveal-emoji-wrap">
+                    <span class="reveal-emoji" id="emotionEmoji">😄</span>
+                  </div>
+                  <div class="reveal-titles">
+                    <span class="reveal-meta-label">Predicted Emotion</span>
+                    <h3 id="emotionWord">Joy</h3>
+                  </div>
+                </div>
+
+                <div class="confidence-dashboard">
+                  <div class="confidence-info">
+                    <span class="confidence-label">Model Confidence</span>
+                    <div class="confidence-metric">
+                      <span class="confidence-number" id="confidenceNumber">0.0</span><span class="confidence-unit">%</span>
+                    </div>
+                  </div>
+                  <div class="confidence-radial-wrap">
+                    <svg class="radial-svg" viewBox="0 0 36 36">
+                      <path class="radial-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                      <path class="radial-fill" id="radialFill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <span class="confidence-mono" id="confidenceText" style="display:none;"></span>
+
+                <div class="echo-wrapper">
+                  <span class="echo-label">Analyzed Input Sentence:</span>
+                  <blockquote class="echoed-text" id="echoedText"></blockquote>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emotion Probability Breakdown Card -->
+            <div class="breakdown">
+              <div class="breakdown-header">
+                <div>
+                  <span class="eyebrow">DISTRIBUTION</span>
+                  <h3 class="breakdown-title">All 6 Emotion Probabilities</h3>
+                </div>
+                <span class="breakdown-badge">Softmax Output</span>
+              </div>
+
+              <div class="bars" id="barsContainer">
+                <!-- Dynamically populated rows -->
+              </div>
+
+              <div class="breakdown-footer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-info-icon">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Probabilities calculated via BiGRU neural network softmax layer.</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="info-section" id="how-it-works">
+        <div class="section-badge">PROCESS PIPELINE</div>
+        <h2 class="section-heading">How Moodline Works</h2>
+        <p class="section-subtext">From raw natural language text to deep bidirectional emotion classification in milliseconds.</p>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </div>
+            <h3 class="step-title">Enter your text</h3>
+            <p class="step-desc">Type or paste any sentence, reflection, or passage up to 2,000 characters into the analysis console.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+              </svg>
+            </div>
+            <h3 class="step-title">BiGRU deep learning processes the text</h3>
+            <p class="step-desc">Input is sanitized, tokenized, and evaluated through forward and backward GRU recurrent passes to capture bidirectional sentiment context.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="step-title">Discover predicted emotion and confidence</h3>
+            <p class="step-desc">The softmax activation layer yields the dominant emotion alongside granular probabilities across all six emotion categories.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technology Stack Section -->
+      <section class="info-section tech-section" id="technology">
+        <div class="section-badge">DEEP LEARNING ARCHITECTURE</div>
+        <h2 class="section-heading">Built with Modern Machine Learning</h2>
+        <p class="section-subtext">A dedicated sequence modeling pipeline engineered for low-latency sentiment intelligence.</p>
+
+        <div class="tech-grid">
+          <div class="tech-badge-card">
+            <div class="tech-badge-icon python-icon">🐍</div>
+            <div class="tech-badge-info">
+              <span class="tech-badge-title">Python</span>
+              <span class="tech-badge-sub">Core ML Backend</span>
+            </div>
+          </div>
+
+          <div class="tech-badge-card">
+            <div class="tech-badge-icon fastapi-icon">⚡</div>
+            <div class="tech-badge-info">
+              <span class="tech-badge-title">FastAPI</span>
+              <span class="tech-badge-sub">High-Speed REST API</span>
+            </div>
+          </div>
+
+          <div class="tech-badge-card">
+            <div class="tech-badge-icon tf-icon">🧠</div>
+            <div class="tech-badge-info">
+              <span class="tech-badge-title">TensorFlow</span>
+              <span class="tech-badge-sub">ML Runtime Platform</span>
+            </div>
+          </div>
+
+          <div class="tech-badge-card">
+            <div class="tech-badge-icon keras-icon">⚙️</div>
+            <div class="tech-badge-info">
+              <span class="tech-badge-title">Keras</span>
+              <span class="tech-badge-sub">Deep Learning Framework</span>
+            </div>
+          </div>
+
+          <div class="tech-badge-card">
+            <div class="tech-badge-icon bigru-icon">🔄</div>
+            <div class="tech-badge-info">
+              <span class="tech-badge-title">BiGRU</span>
+              <span class="tech-badge-sub">Bidirectional Recurrent Net</span>
+            </div>
+          </div>
+
+          <div class="tech-badge-card">
+            <div class="tech-badge-icon nlp-icon">💬</div>
+            <div class="tech-badge-info">
+              <span class="tech-badge-title">NLP</span>
+              <span class="tech-badge-sub">Tokenization & Padding</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Professional Minimal Footer -->
+    <footer class="app-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="brand-symbol small">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="brand-svg">
+              <circle cx="16" cy="16" r="14" fill="#7357E8"/>
+              <path d="M10 18C11.5 20.5 13.5 21.5 16 21.5C18.5 21.5 20.5 20.5 22 18" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="12" cy="13" r="1.8" fill="#FFFFFF"/>
+              <circle cx="20" cy="13" r="1.8" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <div>
+            <span class="footer-brand-name">Moodline</span>
+            <span class="footer-tag">AI Emotion Intelligence</span>
+          </div>
+        </div>
+
+        <div class="footer-meta">
+          <p class="footer-copy">Built using Python and Deep Learning BiGRU Architecture.</p>
+          <p class="footer-rights">© 2026 Moodline. All rights reserved.</p>
+        </div>
+
+        <div class="footer-actions">
+          <a href="#hero" class="btn-back-to-top" title="Back to top">
+            <span>Back to top</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
